@@ -1,0 +1,28 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block h1 %}
+<h1 class="card-title">{{ post.title|censor }}</h1>
+{% endblock h1 %}
+
+{% block content %}
+    {% if post %}
+        <div class="card mb-4">
+            <a href="#!"><img class="card-img-top" src="{% static 'assets/' %}{{ post.PostPhoto }}" alt="..." /></a>
+            <div class="card-body">
+                <div class="small text-muted">{{ post.dateCreation|date:'D m Y H:min'}}</div>
+                <h2 class="card-title">{{ post.title|censor }}</h2>
+                <p class="card-text">{{ post.text|censor }}</p>
+                <h4 class="card-title">{{ post.author }}</h4>
+                <a class="btn btn-primary" href="#!">Комментировать</a>
+            </div>
+        </div>
+    {% else %}
+        <h2>Пост не найден</h2>
+    {% endif %}
+{% endblock content %}
